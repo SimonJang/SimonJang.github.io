@@ -12,6 +12,7 @@ div > h1 {
     width: 800px;
     margin: 0px auto 0px auto;
     background-color: white;
+    padding-bottom: 20px;
 }
 
 div > p {
@@ -52,10 +53,38 @@ fieldset:first-child {
 #submitBut {
     display: inline;
     position: relative;
+    left: 42%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px 5px 5px 5px;
+}
+
+#resetBut {
+    display: inline;
+    position: relative;
     left: 44%;
     margin-bottom: 10px;
     margin-top: 10px;
     padding: 5px 5px 5px 5px;
 }
 
+.wrongAnswer {
+    background-color: red;
+}
 
+.rightAnswer {
+    background-color: green;
+}
+
+.score {
+    background-color: lightsteelblue;
+    border: 1px dotted lightslategray;
+    border-radius: 10px;
+    text-transform: uppercase;
+    margin: 10px 0px 0px 0px;
+    padding-bottom: 10px;
+    width: 20%;
+    position: relative;
+    left: 38%;
+    text-align: center;
+}
