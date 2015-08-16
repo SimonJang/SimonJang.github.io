@@ -85,6 +85,11 @@ function validateForm() {
 
 function resetForm() {
     game.resetScore();
+    legend1.removeAttribute("class");
+    legend2.removeAttribute("class");
+    legend3.removeAttribute("class");
+    legend4.removeAttribute("class");
+    legend5.removeAttribute("class");
     if ( document.getElementById("score")) {
         var p = document.getElementById("score");
         var container = p.parentNode;
