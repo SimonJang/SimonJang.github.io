@@ -1,0 +1,51 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+
+.jumbotron {
+	background-color: #934;
+}
+
+header, .footer, .icons, div {
+	display:block;
+}
+
+html, body{
+	height: 100%;
+}
+
+html, body {
+	margin: 0 0 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+input[type="radio"] {
+	margin-left: 5px;
+	margin-right: 10px;
+}
+
+
+
+.footer {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: 100px;
+		width: 100%;
+}
+
+.footer {background:#999;	color:#fff;	text-align:left;}
+.footer p {	margin:0px;	padding:20px}
+
+.attention {
+	font-weight: bold;
+	color: red;
+}
