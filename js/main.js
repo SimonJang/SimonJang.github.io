@@ -93,7 +93,7 @@ var votingApp = {
             var innerTitleResults = document.createTextNode("Results");
             titleResults.appendChild(innerTitleResults);
             
-            parentContainer.appendChild(titleResults)
+            parentContainer.appendChild(titleResults);
             parentContainer.appendChild(infopara);
                      
             var data = [

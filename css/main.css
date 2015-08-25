@@ -4,11 +4,6 @@
    Author's custom styles
    ========================================================================== */
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 .jumbotron {
 	background-color: #934;
 }
