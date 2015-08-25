@@ -1,51 +1,9 @@
+
 /**************
   Voting-app
 **************/
 
-/*
-To do:
-Make it so that the user is able to unclick a button.
-Make it so that the user can only click one button.
-*/
 
-// commentting out code ( nothing deleted )
-
-/*
-
-  var voteYes = 0;
-  var voteNo = 0;
-
-//The function that calls the checkWhatVote function.
-document.getElementById("submit").addEventListener("click", function() {
-	checkWhatVote()
-	printOutCurrentScore()
-});
-
-//The function that checks the votes.
-function checkWhatVote(){
-
-	if(document.getElementById("yes").checked){
-		voteYes++; 
-	}
-
-	if(document.getElementById("no").checked){
-		voteNo++;
-	}
-
-};
-
-//The function that prints out the score.
-function printOutCurrentScore() {
-	var voteText = "There are currently " + voteNo + " persons that have voted No, and " + voteYes + " that have voted Yes.";
-	document.getElementById("voteParagraph").innerHTML = voteText;
-
-//Disable the button after it has been used once.
-document.getElementById('submit').disabled = 'disabled';
-};
-
-*/
-
-// end comment
 
 // My code ( peanutt )
 // Updated 23/08/2015
@@ -71,12 +29,14 @@ var votingApp = {
 				yesVoteButton.checked = false;
 			};
 			submitButton.onclick = function() {
+
 				var checkup = votingApp.checkVote();
 				if ( checkup ) {
 					this.style.visibility = 'hidden';
 					votingApp.saveVotes();
 					votingApp.toHTML();
 				}
+
 			};
 			
 	},
@@ -91,6 +51,7 @@ var votingApp = {
 		}
 		else {
 			var exceptionP = document.createElement("p");
+                        exceptionP.setAttribute("id","errorMsg");
 			var exceptionText = document.createTextNode("You have to make a choice");
 			exceptionP.appendChild(exceptionText);
 			var domAdd = document.getElementById("voteParagraph");
@@ -99,6 +60,7 @@ var votingApp = {
 			return false;
 		};
 	},
+
 	saveVotes : function() {
 		myFirebaseRef.set({
 			yesVotes: votingApp.voteYes,
@@ -112,11 +74,53 @@ var votingApp = {
 			votingApp.voteNo = dataHandler.noVotes;
 		});
 	},
+
 	toHTML : function() {
-		var voteCountPar = document.getElementById("voteParagraph");
-		var voteCount = document.createTextNode("There are " + votingApp.voteYes + " yes votes and there are " + votingApp.voteNo + " no votes")
-		voteCountPar.setAttribute("class", "attention")
-		voteCountPar.appendChild(voteCount);
+            
+            if ( document.getElementById("errorMsg")) {
+                var error = document.getElementById("errorMsg");
+                var container = error.parentNode;
+                container.removeChild(error);
+            }
+            
+            var infopara = document.createElement("canvas");
+            infopara.setAttribute("id", "infograph", "class", 'info');
+            var containerPlaceholder = document.getElementsByClassName("wrapper")[0];
+            var parentContainer = containerPlaceholder.parentNode;
+            parentContainer.removeChild(containerPlaceholder);
+            
+            var titleResults = document.createElement("h3");
+            var innerTitleResults = document.createTextNode("Results");
+            titleResults.appendChild(innerTitleResults);
+            
+            parentContainer.appendChild(titleResults)
+            parentContainer.appendChild(infopara);
+                     
+            var data = [
+                {
+                    value: votingApp.voteYes,
+                    color: 'green',
+                    hightlight : 'lightgreen',
+                    label: "Yes votes"
+                },
+                {
+                    value: votingApp.voteNo,
+                    color: 'red',
+                    hightlight: 'lightred',
+                    label: "No votes"
+                }
+            ];
+            
+            var ctx = document.getElementById("infograph").getContext("2d");
+            var pieChart = new Chart(ctx).Pie((data));
+            
+            
+         // Currently excluded
+//            var voteCountPar = document.createElement("p");
+//            var voteCount = document.createTextNode("There are " + votingApp.voteYes + " yes votes and there are " + votingApp.voteNo + " no votes");
+//            voteCountPar.setAttribute("class", "attention", 'id', 'votePara');
+//            voteCountPar.appendChild(voteCount);      
+//            infopara.appendChild(voteCountPar);
 	}
 	
 };

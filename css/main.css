@@ -3,11 +3,11 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-html {
-	position: relative;
-	min-height: 100%;
-}
 
+html {
+    position: relative;
+    min-height: 100%;
+}
 
 .jumbotron {
 	background-color: #934;
@@ -17,14 +17,13 @@ header, .footer, .icons, div {
 	display:block;
 }
 
-html, body{
-	height: 100%;
-}
+
 
 html, body {
 	margin: 0 0 0px;
 	padding-top: 0px;
 	padding-bottom: 0px;
+        height: 100%;
 }
 
 input[type="radio"] {
@@ -35,17 +34,26 @@ input[type="radio"] {
 
 
 .footer {
-		position: absolute;
-		left: 0;
-		bottom: 0;
+	
+		bottom: 0px;
 		height: 100px;
 		width: 100%;
+		background: #999;	
+		color: #fff;
+		text-align: left;
+                position:absolute;
+
 }
 
-.footer {background:#999;	color:#fff;	text-align:left;}
+
 .footer p {	margin:0px;	padding:20px}
 
 .attention {
 	font-weight: bold;
 	color: red;
+}
+
+.info {
+    width: 50%;
+    height: 50%;
 }
