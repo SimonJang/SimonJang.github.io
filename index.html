@@ -1,91 +1,82 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-    body {
-        padding-top: 50px;
-        padding-bottom: 20px;
-    }
-    </style>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
-</head>
-<body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-            <![endif]-->
-
-            <div class="jumbotron">
-                <h1 style="text-align: center;"> Time to vote </h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Duplicate assignment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/assignment.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <nav id="navigation">
+            <ul>
+                <li>Home</li>
+                <li>Articles</li>
+                <li>Email</li>
+                <li>Twitter</li>
+            </ul>
+        </nav>
+        <header id="header">
+            Keith Clark<br>
+            Front-end web developer
+        </header>
+        <div class="grid-layout">
+            <div class="grid-item">
+                <img src="img/defender.png" alt="defender picture">
+                <h2>JS1K: Defender</h2>
+                <p>My winning entry for JS1K 2015 is a frantic 1023 byte scrolling shooter inspired by the iconic arcade game defender</p>
             </div>
-
-
-                <div class="container">
-                    <div class="col-md-4">
-                    </div><!--col-md-4-->
-                    <div class="col-md-4">
-                        <div class="wrapper">
-                        <h2>So, it's time to vote. Here is the question.</h2>
-                        <br>
-                        <p>If it were election day, would you vote for Donald Trump?</p>
-                        <br>   
-                        <form>
-                            <input type="radio" name="checkBox" value="yes" id="yes">Yes
-                            <input type="radio" name="checkBox" value="no" id="no">No
-                            <br><br>
-                            <input type="button" id="submit" value="Submit your answer">
-                        </form>
-
-                        <p id="voteParagraph"></p>
-
-                        </div><!-- wrapper -->
-                    </div><!--col-md-4-->
-                    <div class="col-md-4">
-                    </div><!--col-md-4-->
-
-
-        </div> <!-- /container -->
-   
-           
-        <footer class ="footer">
-            
-             <p>
-                The votingPoll is a collaboration project between three individuals from a site called Reddit between <b>xapax</b>, <b>Simon Jang</b>, and <b>danieljoonlee</b> What makes this project a bit more unique is the collaboration process between three individuals who live in different countries such as, Chile, Belgium, and USA.
-                <br>
-                <img src="Chile.png" alt="Chile Icon" style="width: 22px; height: 22px;">
-                <img src="belgium.png" alt="American Icon" style="width: 20px; height: 20px;">
-                <img src="United-States.png" alt="American Icon" style="width: 20px; height: 20px;">
-             </p>
+        </div>
+        <div class="grid-layout">
+            <div class="grid-item">
+                <img src="img/defender.png" alt="defender picture">
+                <h2>CSS 3D Engine</h2>
+                <p>A 3D world with lighting, shadows and collision detection created with CSS transforms and HTML.</p>
+            </div>
+        </div>
+        <div class="grid-layout">
+            <div class="grid-item">
+                <img src="img/defender.png" alt="defender picture">
+                <h2>CSS 3D Shadows</h2>
+                <p>An attempt to create real-time lighting and shadows cast from 3D models created with CSS tranforms</p>
+            </div>
+        </div>
+        <div class="grid-layout">
+            <div class="grid-item">
+                <img src="img/defender.png" alt="defender picture">
+                <h2>Hacker News</h2>
+                <p>In September 2013, I spoke at Hacker News London about my 3D CSS experiments and some of the techniques used</p>
+            </div>
+        </div>
+        <div class="grid-layout">
+            <div class="grid-item">
+                <img src="img/defender.png" alt="defender picture">
+                <h2>CSS Lightning</h2>
+                <p>Dynamically shading elements positioned using CSS 3D transforms by decomposing matrices and calculating vertex data</p>
+            </div>
+        </div>
+        <div class="grid-layout">
+            <div class="grid-item">
+                <img src="img/defender.png" alt="defender picture">
+                <h2>JKS1K: Thrust</h2>
+                <p>My entry for the 2014 Javascript 1K competition was a remake of the classic 8-bit computer game, Thrust</p>
+            </div>
+        </div>
+        <footer>
+            <div class="grid-footer">
+                <h2>Personal achievements</h2>
+                <ul>
+                    <li>2015 JS1k - winner</li>
+                    <li>2014 Net Awards: Demo of the year - winner</li>
+                    <li>2014 Net Awards: Developer of the year - longlist</li>
+                    <li>2013 Public speaking for the first time</li>
+                    <li>2011 .net Magazine innovation of the year - shortlist</li>
+                </ul>
+            </div>
+            <div class="grid-footer">
+                <h2>Referenced in...</h2>
+                <img src="img/books.png" alt="book items">
+                <p>I am very proud to have had my work referenced in a number of publications, written by some very talented people</p>
+            </div>
         </footer>
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>');</script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/chart.min.js"></script>
-        <script src="js/main.js"></script>    
-
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='http://www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
     </body>
-    </html>
+</html>

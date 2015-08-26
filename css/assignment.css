@@ -1,0 +1,129 @@
+// CSS style sheet
+
+header, section, footer, aside, nav, article, figure, figcaption {
+    display: block;
+}
+
+body {
+    margin: auto;
+    font-family: "Lustria" , "George";
+}
+
+nav {
+    background-color: #980013;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+nav ul {
+    float: left;
+    position: relative;
+    left: 47%;
+    list-style-type: none;
+}
+
+nav ul li {
+    display: block;
+    float: left;
+    position: relative;
+    right: 50%;
+    color: white;
+    font-family: "Lustria" , "George";
+    line-height: 1.50;
+    font-size: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+header {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    background-color: #b30027;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-family: "Lustria" , "George";
+    color: white;
+    line-height: 2;
+    font-size: 40px;
+}
+
+.grid-layout {
+    display: inline-block;
+    width: 25%;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.grid-layout img {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.grid-layout h2 {
+    text-align: center;
+    font-family: "Lustria" , "George";
+}
+
+.grid-item  {
+    float: left;
+    width: 100%;
+    display: inline-block;
+}
+
+.grid-item h2 {
+    color: #a4a4a4;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+
+.grid-item p {
+    border-top: solid 1px #a4a4a4;
+    padding-top: 15px;
+    color: #a4a4a4;
+    font-family: "Lustria" , "George";
+}
+
+
+footer {
+    background-color: #737978;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.grid-footer {
+    width: 35%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    color: white;
+    font-size: 20px;
+    
+}
+
+.grid-footer:first-of-type {
+    margin-left: 200px;
+}
+
+.grid-footer h2 {
+    font-size: 30px;
+    color: white;
+}
+
+.grid-footer ul li {
+    font-size: 20px;
+    color: white;
+    line-height: 2.0;
+}
+
+
+
