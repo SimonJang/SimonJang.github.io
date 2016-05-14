@@ -1,2 +1,0 @@
-# Voting
-A voting-app
