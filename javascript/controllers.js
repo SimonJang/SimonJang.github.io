@@ -9,7 +9,8 @@
         .controller('leverancierController', leverancierController)
         .controller('leverancierDetailController', leverancierDetailController)
         .controller('gebruikerController', gebruikerController)
-        .controller('logController', logController);
+        .controller('logController', logController)
+        .controller('levserviceController', levserviceController);
 
     function homeController() {
         var vm = this;
@@ -173,6 +174,27 @@
 
         vm.clearSelection = function() {
             vm.logs = null;
+        }
+    }
+
+    levserviceController.$inject = ['$scope', "$routeParams", "tariefService"];
+
+    function levserviceController($scope, $routeParams, tariefService) {
+        var vm = this;
+
+        vm.getTarieven = function() {
+            tariefService.getTarieven()
+                .success(function(tarieven) {
+                    vm.tarieven = tarieven;
+                })
+                .error(function(err) {
+                    vm.error = err;
+                    vm.errorMsg = "Er is een iets foutgegaan"
+                });
+        };
+
+        vm.clearSelection = function() {
+            vm.tarieven = null;
         }
     }
 

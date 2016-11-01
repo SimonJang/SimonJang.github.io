@@ -14,7 +14,7 @@
     {
       "groen": false,
       "extraVoorwaarden": null,
-      "id": 1,
+      "id": 2,
       "naam": "Eni Fake Groene stroom",
       "basisprijs": 121,
       "abonnementen": null,
@@ -25,7 +25,7 @@
     {
       "groen": false,
       "extraVoorwaarden": null,
-      "id": 1,
+      "id": 3,
       "naam": "Luminus Fake Groene stroom",
       "basisprijs": 121,
       "abonnementen": null,

@@ -8,7 +8,8 @@
     angular.module('beheerApp')
         .service('leverancierService', leverancierService)
         .service('gebruikerService', gebruikerService)
-        .service('logService', logService);
+        .service('logService', logService)
+        .service('tariefService', tariefService);
 
     leverancierService.$inject = ['$http','GLOBALS'];
 
@@ -59,7 +60,26 @@
 
         service.getLogById = function(id) {
             // TODO voor REST
-        }
+        };
+
+        return service;
+    }
+    
+    tariefService.$inject = ['$http', 'GLOBALS'];
+    
+    function tariefService($http, GLOBALS) {
+        var service = {};
+        
+        service.getTarieven = function() {
+            return $http({
+                method: 'GET',
+                url: GLOBALS.tariefUrl
+            })
+        };
+
+        service.getTariefById = function(id) {
+            // TODO voor REST
+        };
 
         return service;
     }

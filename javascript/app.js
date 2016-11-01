@@ -43,6 +43,11 @@
                 templateUrl: 'views/logboek.html',
                 controller: 'logController',
                 controllerAs: 'logCtrl'
-            });
+            })
+            .when('/zoeklevservice', {
+                templateUrl: 'views/levservicesearch.html',
+                controller: 'levserviceController',
+                controllerAs: 'levserviceCtrl'
+            })
     }
 })();

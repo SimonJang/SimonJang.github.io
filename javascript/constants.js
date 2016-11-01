@@ -7,6 +7,7 @@
     angular.module('beheerApp').constant('GLOBALS', {
         leverancierUrl: 'data/leveranciers.json',
         gebruikerUrl: 'data/gebruikers.json',
-        logUrl: 'data/log.json'
+        logUrl: 'data/log.json',
+        tariefUrl: 'data/tarieven.json'
     })
 })();
