@@ -1,94 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="beheerApp">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="A tribute website for Isaac Asimov">
-    <meta name="author" content="Simon Jang">
-    <title>Tribute Page for Isaac Asimov</title>
-    <link rel="stylesheet" href="stylesheets/main2.css">
+    <title>Beheertool meting applicatie</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="stylesheets/main.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap/js/collapse.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="javascript/app.js"></script>
+    <script src="javascript/controllers.js"></script>
+    <script src="javascript/services.js"></script>
+    <script src="javascript/constants.js"></script>
 </head>
-<body>
-    <header>
-        <h1>Tribute to Isaac Asimov</h1>
-        <h2>One of the "Big Three" science fiction writers</h2>
-    </header>
-    <main>
-        <div class="motivation">
-        <article class="motivation">
-            <h3>Why a tribute?</h3>
-            <p>
-                I've read the "Foundation" trilogy and decided that Isaac Asimov deserved a tribute page. As one of the "Big Three",
-                Isaac Asimov is considered to be one of the most influential science fiction writers.
-            </p>
-            <footer class="source">
-                This is a <a href="https://www.freecodecamp.com/map">FreeCodeCamp</a> assignment.
-            </footer>
-        </article>
+<body ng-controller="homeController">
+    <div class="jumbotron ph-custom">
+        <h1 class="page-header ph-text-custom">Beheertool Meting applicatie<br /></h1>
+    </div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/home">Overzicht</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-nav">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button">Beheren leveranciers
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#/zoekleverancier">Overzicht leveranciers</a></li>
+                                <li><a href="#/createleverancier">Creatie leverancier</a></li>
+                                <li><a href="#/editleverancier">Aanpassen leverancier</a></li>
+                                <li><a href="#/createlevservice">Creatie abonnement</a></li>
+                                <li><a href="#/editlevservice">Aanpassen abonnement</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#/usersoverview">Overzicht gebruikers</a></li>
+                        <li><a href="#/logs">Logboek transacties</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><button type="button" class="btn btn-default navbar-btn">Log in</button></li>
+                        <li><p class="navbar-text">USERNAME</p></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid viewContainer col-xs-8 col-xs-offset-2" ng-view>
         </div>
-        <div class="bio">
-        <article class="bio">
-            <h3>Biography: overview of his life</h3>
-            <ul>
-                <li>Born between Oktober 4, 1919 and January 2, 1920 in Petrovichi, Russia</li>
-                <li>Moved to Brooklyn, New York at the age of 3</li>
-                <li>Became a naturalized U.S. citizen in 1928</li>
-                <li>Completed MA in chemistry in 1941</li>
-                <li>Earned a PhD in biochemistry in 1948</li>
-                <li>Started as professor at the Boston University School of Medicine in 1948</li>
-                <li>Turned to full-time writing in 1958</li>
-                <li>Died in 1992</li>
-            </ul>
-            <footer class="source"><a href="https://en.wikipedia.org/wiki/Isaac_Asimov">Source: Wikipedia</a></footer>
-        </article>
-        </div>
-        <div class="biblio">
-        <article class="biblio">
-            <h3>Bibliography (Science fiction only)</h3>
-            <p>This is a bibliography of books by Isaac Asimov, organized by series chronologically and by series timeline</p>
-            <h4>Robot Series</h4>
-            <ul>
-                <li>The Caves of Steel (1954)</li>
-                <li>The Naked Sun (1957)</li>
-                <li>The Robots of Dawn (1983)</li>
-                <li>Robots and Empires (1985)</li>
-                <li>The Positronic Man (1992), a novel based on Asimov's short story "The Bicentennial Man", co written by Robert Silverberg</li>
-            </ul>
-            <h4>Galactic Empire Series</h4>
-                <ul>
-                    <li>The Stars, Like Dust (1951)</li>
-                    <li>The Currents of Space (1952)</li>
-                    <li>Pebble in the Sky (1950)</li>
-                    <li>"Blinkd Alley" (1945), short story reprinted in The Early Asimov</li>
-                </ul>
-            <h4>The Foundation Series</h4>
-            <h5>Prequels</h5>
-            <ul>
-                <li>Prelude to Foundation (1988)</li>
-                <li>Forward the Foundation (1991)</li>
-            </ul>
-            <h5>Foundation Trilogy</h5>
-            <ul>
-                <li>Foundation (1951)</li>
-                <li>Foundation and Empire (1952)</li>
-                <li>Second Foundation (1953)</li>
-            </ul>
-            <h5>Sequels</h5>
-            <ul>
-                <li>Foundation Edge (1982)</li>
-                <li>Foundation and Earth (1986)</li>
-            </ul>
-            <h4>Lucky Starr series (using pseudonym Paul French)</h4>
-            <ul>
-                <li>David Starr, Space Ranger (1952)</li>
-                <li>Lucky Starr and the Pirates of the Asteroids (1954)</li>
-                <li>Lukcy Starr and the Oceans of Venus (1954)</li>
-                <li>Lukcy Starr and the Big Sun of Mercury (1956)</li>
-                <li>Lukcy Starr and the Moons of Jupiter (1957)</li>
-                <li>Lukcy Star and the Rings of Saturn (1958)</li>
-            </ul>
-            <footer class="source"><a href="https://en.wikipedia.org/wiki/Isaac_Asimov_book_series_bibliography">Source: Wikipedia</a></footer>
-        </article>
-        </div>
-    </main>
 </body>
 </html>
