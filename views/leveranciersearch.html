@@ -5,7 +5,7 @@
     <title>Leverancier</title>
 </head>
 <body>
-    <div ng-controller="leverancierController as leverancierCtrl">
+    <div>
         <div class="container" ng-show="leverancierCtrl.error">
             <b>{{leverancierCtrl.errorMsg}}</b>
         </div>
@@ -13,17 +13,13 @@
             <form class="ph-custom-inline">
                 <div class="form-group">
                     <label for="naamLeverancier">Naam Leverancier</label>
-                    <input type="text" class="form-control" id="naamLeverancier" placeholder="Naam leverancier" ng-model="naamLev">
+                    <input type="text" class="form-control" id="naamLeverancier" placeholder="Naam leverancier" ng-model="search.naam">
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="typeE" ng-change="leverancierCtrl.onChange()"/> Filteren op elektriciteitsleveranciers
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="typeG" ng-change="leverancierCtrl.onChange()"/> Filteren op gasleveranciers
-                    </label>
+                <div class="form-group">
+                    <label for="typeSelector">Filter op type dienstverlening leverancier</label>
+                <select class=form-control id="typeSelector" ng-change="leverancierCtrl.onTypeChange()" ng-model="selectedType">
+                    <option ng-repeat="type in leverancierCtrl.types">{{type}}</option>
+                </select>
                 </div>
                 <!-- <button ng-click="leverancierCtrl.getLeverancierByName()" type="button" class="btn btn-default">Zoek leverancier</button> -->
                 <button ng-click="leverancierCtrl.getLeveranciers()" type="button" class="btn btn-default">Zoek alle leveranciers</button>
@@ -37,7 +33,7 @@
                         <th><b>Type</b></th>
                         <th><b>Link</b></th>
                     </tr>
-                    <tr ng-repeat="lev in leverancierCtrl.leveranciers | orderBy: 'naamLev' | filter: naamLev as resultSet">
+                    <tr ng-repeat="lev in leverancierCtrl.leveranciers | orderBy: 'lev.naam' | filter:search">
                         <td>{{lev.naam}}</td>
                         <td>
                             <ul class="list-group">

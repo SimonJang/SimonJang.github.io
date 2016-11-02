@@ -7,6 +7,7 @@
     angular.module('beheerApp')
         .controller('homeController', homeController)
         .controller('leverancierController', leverancierController)
+        .controller('leverancierCreateController', leverancierCreateController)
         .controller('leverancierDetailController', leverancierDetailController)
         .controller('gebruikerController', gebruikerController)
         .controller('logController', logController)
@@ -21,30 +22,13 @@
 
     function leverancierController($scope,leverancierService) {
         var vm = this;
+        vm.types = ["Alle", "Elektriciteit", "Gas"];
+        vm.selectE = false;
+        vm.selectG = false;
         vm.getLeveranciers = function() {
             leverancierService.getLeveranciers()
                 .success(function(leveranciers) {
                     vm.leveranciers = leveranciers;
-                    if($scope.typeE) {
-                        vm.leveranciers = leveranciers.filter(function (obj) {
-                            if (obj.type.indexOf("Elek") !== -1) {
-                                return true;
-                            }
-                            else {
-                                return false;
-                            }
-                        })
-                    }
-                    else if ($scope.typeG) {
-                            vm.leveranciers = leveranciers.filter(function(obj) {
-                                if(obj.type.indexOf("Gas") !== -1) {
-                                    return true;
-                                }
-                                else {
-                                    return false;
-                                }
-                            });
-                        }
                 })
                 .error(function(err) {
                     vm.errorMsg = "Er is een probleem met de server.";
@@ -70,35 +54,37 @@
         };
 
         vm.clearSelection = function() {
-            vm.leveranciers = null;
-            vm.selectedLeveranciers = null;
+            vm.leveranciers = undefined;
+            vm.selectedLeveranciers = undefined;
         };
 
-        vm.onChange = function() {
-            if($scope.typeE) {
-                vm.leveranciers = vm.leveranciers.filter(function (obj) {
-                    if (obj.type.indexOf("Elektriciteit") !== -1) {
-                        return true;
+        vm.onTypeChange = function() {
+            vm.leveranciers = null;
+            var currentSelected = $scope.selectedType;
+            leverancierService.getLeveranciers()
+                .success(function(leveranciers) {
+                    if(currentSelected !== null && currentSelected === "Elektriciteit") {
+                        vm.leveranciers = leveranciers.filter(function(obj) {
+                            return obj.type.indexOf(currentSelected) !== -1;
+                        })
+                    }
+                    else if(currentSelected !== null && currentSelected === "Gas") {
+                        vm.leveranciers = leveranciers.filter(function(obj) {
+                            return obj.type.indexOf(currentSelected) !== -1
+                        })
                     }
                     else {
-                        return false;
+                        vm.leveranciers = leveranciers;
                     }
                 })
-            }
-            else if ($scope.typeG) {
-                vm.leveranciers = vm.leveranciers.filter(function(obj) {
-                    if(obj.type.indexOf("Gas") !== -1) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                });
-            }
-            else if(!$scope.typeG && !$scope.typeE) {
-                vm.getLeveranciers();
-            }
-        }
+        };
+    }
+
+    leverancierCreateController.$inject = ['$scope', 'leverancierService'];
+
+    function leverancierCreateController($scope, leverancierService) {
+        var vm = this;
+        
     }
 
     leverancierDetailController.$inject = ['$routeParams', '$scope', 'leverancierService'];

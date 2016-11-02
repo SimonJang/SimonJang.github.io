@@ -49,5 +49,10 @@
                 controller: 'levserviceController',
                 controllerAs: 'levserviceCtrl'
             })
+            .when('/createleverancier', {
+                templateUrl: 'views/createleverancier.html',
+                controller: 'leverancierCreateController',
+                controllerAs: 'leverancierCreateCtrl'
+            })
     }
 })();

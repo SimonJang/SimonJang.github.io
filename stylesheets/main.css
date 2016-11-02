@@ -20,3 +20,7 @@ TODO SASS
 .viewContainer {
     margin-top: 0.2em;
 }
+
+.checkboxPadding {
+    padding-right: 1em;
+}

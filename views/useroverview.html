@@ -28,7 +28,7 @@
                     <th><b>MAC-adres</b></th>
                     <th><b>Link</b></th>
                 </tr>
-                <tr ng-repeat="geb in gebruikerCtrl.gebruikers | orderBy: 'naamGeb' | filter:search">
+                <tr ng-repeat="geb in gebruikerCtrl.gebruikers | orderBy: 'geb.naam' | filter:search">
                     <td>{{geb.familienaam}}</td>
                     <td>{{geb.voornaam}}</td>
                     <td>{{geb.emailAdres}}</td>

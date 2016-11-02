@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aanmaken van een leverancier</title>
+</head>
+<body>
+    <h2 class="ph-custom-inline">Creatie leverancier</h2>
+    <form class="ph-custom-inline">
+        <div class="form-group">
+            <label for="naamLeverancier">Naam Leverancier</label>
+            <input type="text" class="form-control" id="naamLeverancier" ng-model="naamLev">
+            <label for="websiteLeverancier">Website Leverancier</label>
+            <input type="text" class="form-control" id="websiteLeverancier" ng-model="websiteLev">
+        </div>
+        <div class="checkbox">
+            <h4>Diensten</h4>
+            <label><input type="checkbox" id="elektriciteit" ng-model="typeE">Elektriciteit</label><br/>
+            <label><input type="checkbox" id="gas" ng-model="typeG">Gas</label>
+        </div>
+    </form>
+</body>
+</html>
