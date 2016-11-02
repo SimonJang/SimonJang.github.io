@@ -15,6 +15,7 @@
 
     function leverancierService($http,GLOBALS) {
         var service = {};
+        service.temp = {};
         service.getLeveranciers = function() {
             return $http({
                 method: 'GET',
@@ -24,6 +25,19 @@
 
         service.getLeverancierById = function(id) {
             // TODO voor REST
+        };
+        
+        service.saveLeverancier = function(lev) {
+            service.temp = null;
+            // TODO voor REST
+        };
+        
+        service.tempSave = function(tempLev) {
+            service.temp = tempLev;
+        };
+        
+        service.getTemp = function() {
+            return service.temp;
         };
 
         return service;

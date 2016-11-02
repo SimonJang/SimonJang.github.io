@@ -80,10 +80,14 @@
         };
     }
 
-    leverancierCreateController.$inject = ['$scope', 'leverancierService'];
+    leverancierCreateController.$inject = ['$scope', 'leverancierService','$location'];
 
-    function leverancierCreateController($scope, leverancierService) {
+    function leverancierCreateController($scope, leverancierService, $location) {
         var vm = this;
+        vm.temp = null;
+        vm.changeDefault = function() {
+            $location.path('/createabonnement');
+        }
         
     }
 

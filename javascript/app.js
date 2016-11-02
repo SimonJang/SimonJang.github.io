@@ -54,5 +54,10 @@
                 controller: 'leverancierCreateController',
                 controllerAs: 'leverancierCreateCtrl'
             })
+            .when('/createabonnement', {
+                templateUrl: "views/createtariefplan.html",
+                controller: 'tariefplanCreateController',
+                controllerAs: 'tariefplanCreateCtrl'
+            })
     }
 })();

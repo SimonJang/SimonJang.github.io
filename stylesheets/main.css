@@ -1,6 +1,6 @@
 /*
 Custom CSS bovenop Bootstrap
-TODO SASS
+TODO OMVORMEN NAAR SASS of LESS
 */
 
 .ph-custom {
@@ -10,6 +10,15 @@ TODO SASS
 .ph-custom-inline {
     border-bottom: 0.5px solid darkgrey;
     padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.ph-custom-inline-no-padding {
+    border-bottom: 0.5px solid darkgrey;
+}
+
+.ph-custom-inline-no-line {
+    padding-top: 4em;
     padding-bottom: 1em;
 }
 
@@ -23,4 +32,9 @@ TODO SASS
 
 .checkboxPadding {
     padding-right: 1em;
+}
+
+.warning-span {
+    margin-bottom: 5px;
+    display: block;
 }
