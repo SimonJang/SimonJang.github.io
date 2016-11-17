@@ -43,3 +43,7 @@ TODO OMVORMEN NAAR SASS of LESS
     margin-bottom: 5px;
     display: block;
 }
+
+.graph {
+    border-left: 1px solid darkgrey;
+}

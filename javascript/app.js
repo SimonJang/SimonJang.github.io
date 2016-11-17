@@ -4,7 +4,7 @@
  */
 
 (function() {
-    angular.module("beheerApp",['ngRoute']).config(moduleConfig);
+    angular.module("beheerApp",['ngRoute', 'chart.js']).config(moduleConfig);
     
     moduleConfig.$inject = ['$routeProvider'];
     
@@ -20,7 +20,7 @@
                 controller: 'homeController',
                 controllerAs: 'homeCtrl'
             })
-
+                
             // CRUD Leveranciers
 
             .when('/zoekleverancier', {
@@ -84,6 +84,11 @@
                 controller: 'gebruikerController',
                 controllerAs: 'gebruikerCtrl'
             })
+            .when('/userdetails/:id', {
+                templateUrl: 'views/userdetails.html',
+                controller: 'gebruikerDetailController',
+                controllerAs: 'gebruikerDetailCtrl'
+            })
 
             // CRUD logs
 
@@ -91,6 +96,16 @@
                 templateUrl: 'views/logboek.html',
                 controller: 'logController',
                 controllerAs: 'logCtrl'
+            })
+            .when('/detailtransactie/:id', {
+                templateUrl: 'views/logdetails.html',
+                controller: 'logDetailController',
+                controllerAs: 'logDetailCtrl'
+            })
+            .when('/logsuser/:id', {
+                templateUrl: 'views/logboekuser.html',
+                controller: 'gebruikerDetailController',
+                controllerAs: 'gebruikerDetailCtrl'
             });
 
     }
