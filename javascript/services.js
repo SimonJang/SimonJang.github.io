@@ -10,7 +10,6 @@
         .service('aanvraagService', aanvraagService)
         .service('leverancierService', leverancierService)
         .service('gebruikerService', gebruikerService)
-        .service('logService', logService)
         .service('tariefService', tariefService);
 
     loginService.$inject = ['$http', 'GLOBALS'];
@@ -47,13 +46,15 @@
         };
 
         service.getLeverancierById = function(id) {
-            // TODO voor REST, tijdelijke implementatie met lokale JSON
-
+            return $http({
+                method: 'GET',
+                url: GLOBALS.leverancierUrl + id
+            })
         };
         
         service.saveLeverancier = function(lev) {
             service.temp = null;
-            // TODO voor REST
+            $http.post(GLOBALS.leverancierUrl, lev)
         };
         
         service.tempSave = function(tempLev) {
@@ -61,18 +62,6 @@
             var d = new Date();
             service.temp.createdOn = d.getTime();
             d = null;
-        };
-        
-        service.getTemp = function() {
-            var d = new Date();
-            var checker = d.getTime();
-            if(checker - (5 * 60 * 1000) > service.temp.createdOn) {
-                service.temp = null;
-                return service.temp;
-            }
-            else {
-                return service.temp;
-            }
         };
 
         service.saveTarief = function(tarief) {
@@ -94,69 +83,11 @@
         };
 
         service.getGebruikerById = function(id) {
-            // TODO voor REST
-        };
-        return service;
-    }
-
-    logService.$inject = ['$http', 'GLOBALS'];
-
-    function logService($http, GLOBALS) {
-        var service = {};
-        service.maanden = ['januari', 'februari', 'maart', 'april','mei','juni','juli','augustus','september','oktober','november','december'];
-        service.types = ['Elektriciteit', 'Gas'];
-
-
-        service.getAllLogs = function() {
             return $http({
                 method: 'GET',
-                url: GLOBALS.logUrl
+                url: GLOBALS.gebruikerUrl+id
             })
         };
-
-        service.getLogById = function(id) {
-            // TODO voor REST
-        };
-
-        service.analyseDateYear = function(logs) {
-            var filtered = [];
-            var currentDate = new Date()
-            var currentYear = currentDate.getFullYear()
-            logs.filter(function(log) {
-                var tempDate = new Date(log.datum);
-                if(tempDate.getFullYear() == currentYear) {
-                    filtered.push(log);
-                }
-            });
-            return filtered;
-        };
-
-        service.analyseMonths = function(logs) {
-            var filtered = service.analyseDateYear(logs);
-            var filteredMonths = null;
-            filteredMonths = [0,0,0,0,0,0,0,0,0,0,0,0];
-            for(var log in filtered) {
-                var tempDate = new Date(filtered[log].datum);
-                filteredMonths[tempDate.getMonth()] = filteredMonths[tempDate.getMonth()] + 1;
-            }
-            return filteredMonths;
-        };
-
-        service.analyseType = function(logs) {
-            var filtered = service.analyseDateYear(logs);
-            var filteredTypes = null;
-            filteredTypes = [0,0];
-            for(var log in filtered) {
-                if(filtered[log].type == 'Elektriciteit') {
-                    filteredTypes[0] += 1;
-                }
-                else if(filtered[log].type == 'Gas') {
-                    filteredTypes[1] += 1;
-                }
-            }
-            return filteredTypes;
-        };
-
         return service;
     }
     
@@ -173,8 +104,15 @@
         };
 
         service.getTariefById = function(id) {
-            // TODO voor REST
+            return $http({
+                method: 'GET',
+                url: GLOBALS.tariefUrl+id
+            })
         };
+
+        service.saveTarief = function(tarief) {
+            // TODO
+        }
 
         return service;
     }

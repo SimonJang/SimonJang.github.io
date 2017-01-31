@@ -11,8 +11,6 @@
         .controller('leverancierDetailController', leverancierDetailController)
         .controller('gebruikerController', gebruikerController)
         .controller('gebruikerDetailController', gebruikerDetailController)
-        .controller('logController', logController)
-        .controller('logDetailController', logDetailController)
         .controller('levserviceController', levserviceController)
         .controller('levserviceCreateController', levserviceCreateController)
         .controller('aanvraagController', aanvraagController)
@@ -78,12 +76,12 @@
     }
 
     /*
-    Retrieve controller
+    Ophalen van leveranciers
      */
 
-    leverancierController.$inject = ['$scope','leverancierService'];
+    leverancierController.$inject = ['leverancierService'];
 
-    function leverancierController($scope,leverancierService) {
+    function leverancierController(leverancierService) {
         var vm = this;
         vm.types = ["Alle", "Elektriciteit", "Gas"];
         vm.selectE = false;
@@ -98,9 +96,6 @@
                     vm.error = err;
                 })
         };
-
-        // TODO?
-        // Wordt momenteel niet gebruikt, inline filtering met Angular in de plaats
 
         vm.getLeverancierByName = function(name) {
             leverancierService.getLeveranciers()
@@ -121,27 +116,6 @@
             vm.leveranciers = undefined;
             vm.selectedLeveranciers = undefined;
         };
-
-        vm.onTypeChange = function() {
-            vm.leveranciers = null;
-            var currentSelected = $scope.selectedType;
-            leverancierService.getLeveranciers()
-                .success(function(leveranciers) {
-                    if(currentSelected !== null && currentSelected === "Elektriciteit") {
-                        vm.leveranciers = leveranciers.filter(function(obj) {
-                            return obj.type.indexOf(currentSelected) !== -1;
-                        })
-                    }
-                    else if(currentSelected !== null && currentSelected === "Gas") {
-                        vm.leveranciers = leveranciers.filter(function(obj) {
-                            return obj.type.indexOf(currentSelected) !== -1
-                        })
-                    }
-                    else {
-                        vm.leveranciers = leveranciers;
-                    }
-                })
-        };
     }
 
     leverancierCreateController.$inject = ['$scope', 'leverancierService','$location'];
@@ -150,14 +124,15 @@
         var vm = this;
         vm.temp = null;
         vm.onCreateLevService = function() {
-            var temp = {};
-            temp.naam = $scope.naamLev;
-            temp.website = $scope.websiteLev;
-            temp.types = [];
-            temp.types.push($scope.typeE);
-            temp.types.push($scope.typeG);
-            leverancierService.tempSave(temp);
             $location.path('/createabonnement');
+        };
+
+        vm.createLeverancier = function() {
+            var lev = {};
+            lev.naam = $scope.naamLev;
+            lev.website = $scope.websiteLev;
+            leverancierService.saveLeverancier(lev);
+            $location.path('/zoekleverancier');
         }
         
     }
@@ -172,10 +147,9 @@
         var vm = this;
         vm.leverancier = {};
         vm.id = $routeParams.id;
-        leverancierService.getLeveranciers()
-            .success(function(leveranciers) {
-                vm.leveranciers = leveranciers;
-                vm.leverancier = leveranciers[vm.id-1];
+        leverancierService.getLeverancierById(vm.id)
+            .success(function(leverancier) {
+                vm.leverancier = leverancier
             });
 
         tariefService.getTarieven()
@@ -195,13 +169,6 @@
             var lev = {};
             lev.naam = $scope.naamLev;
             lev.website = $scope.websiteLev;
-            lev.types = [];
-            if(typeof $scope.typeE !== 'undefined') {
-                lev.types.push("Elektriciteit");
-            }
-            if(typeof $scope.typeG !== 'undefined') {
-                lev.types.push("Gas");
-            }
             leverancierService.saveLeverancier(lev)
         };
         
@@ -217,13 +184,13 @@
         };
 
         vm.onCreateLevService = function() {
-            $location.path('/createabonnement/' + vm.id);
+            $location.path('/createabonnement');
         }
     }
 
-    gebruikerController.$inject = ['$routeParams','$scope', 'gebruikerService', 'logService'];
+    gebruikerController.$inject = ['gebruikerService'];
 
-    function gebruikerController($routeParams,$scope, gebruikerService,logService) {
+    function gebruikerController(gebruikerService) {
         var vm = this;
 
         vm.getGebruikers = function() {
@@ -243,9 +210,9 @@
         }
     }
 
-    gebruikerDetailController.$inject = ['$routeParams', 'gebruikerService', 'logService'];
+    gebruikerDetailController.$inject = ['$routeParams', 'gebruikerService'];
 
-    function gebruikerDetailController($routeParams, gebruikerService, logService) {
+    function gebruikerDetailController($routeParams, gebruikerService) {
         var vm = this;
         vm.id = $routeParams.id;
 
@@ -254,114 +221,13 @@
                 var gebs = gebruikers;
                 vm.gebruiker = gebs[vm.id-1];
             });
-
-        logService.getAllLogs()
-            .success(function(logs) {
-                var allLogs = logs;
-                vm.logs = allLogs;
-            });
-        
-        
-    }
-    
-    logController.$inject = ['$scope', 'logService'];
-
-    function logController($scope, logService) {
-        var vm = this;
-        vm.types = ["Alle","Elektriciteit", "Gas"];
-        $scope.labels = null;
-        $scope.data = null;
-        $scope.isType = false;
-
-        vm.onTypeChange = function() {
-            vm.logs = null;
-            $scope.labels = null;
-            $scope.data = null;
-            $scope.isType = false;
-            var currentSelected = $scope.selectedType;
-            logService.getAllLogs()
-                .success(function(logs) {
-                    if(currentSelected !== null && currentSelected === "Elektriciteit") {
-                        vm.logs = logs.filter(function(obj) {
-                            return obj.type === currentSelected;
-                        });
-                        vm.logs.sort(function(a,b) {
-                            return new Date(b.datum) - new Date(a.datum);
-                        });
-                        $scope.labels = logService.maanden;
-                        $scope.data = logService.analyseMonths(vm.logs);
-                        $scope.isType = false;
-
-                    }
-                    else if(currentSelected !== null && currentSelected === "Gas") {
-                        vm.logs = logs.filter(function(obj) {
-                            return obj.type === currentSelected;
-                        })
-                        vm.logs.sort(function(a,b) {
-                            return new Date(b.datum) - new Date(a.datum);
-                        })
-                        $scope.labels = logService.maanden;
-                        $scope.data = logService.analyseMonths(vm.logs)
-                        $scope.isType = false;
-                    }
-                    else {
-                        vm.logs = logs;
-                        vm.logs.sort(function(a,b) {
-                            return new Date(b.datum) - new Date(a.datum);
-                        })
-                        $scope.labels = logService.types;
-                        $scope.data = logService.analyseType(vm.logs)
-                        $scope.isType = true;
-                    }
-                })
-        };
-
-        vm.clearSelection = function() {
-            vm.logs = null;
-        }
     }
 
-    logDetailController.$inject = ['$routeParams','$scope', 'logService', 'gebruikerService', 'leverancierService','tariefService'];
+    /* Controller voor het aanpassen van de tarieven*/
 
+    levserviceController.$inject = ["tariefService"];
 
-    function logDetailController($routeParams,$scope,logService, gebruikerService, leverancierService,tariefService) {
-        var vm = this;
-        vm.id = $routeParams.id;
-
-        logService.getAllLogs()
-            .success(function(logs) {
-                var temp = logs;
-                vm.log = temp[vm.id - 1];
-                vm.details = vm.log.details;
-            });
-
-        gebruikerService.getGebruikers()
-            .success(function(gebs) {
-                var temp = gebs;
-                vm.naam = temp[vm.log.gebruikersID - 1].emailAdres;
-            });
-
-        leverancierService.getLeveranciers()
-            .success(function(levs) {
-                var temp = levs;
-                var tempIDNew = vm.details.newLevID;
-                var tempIDOld = vm.details.exLevID
-                vm.naamLevO = temp[tempIDOld - 1].naam;
-                vm.naamLevN = temp[tempIDNew - 1].naam;
-            });
-
-        tariefService.getTarieven()
-            .success(function(tars) {
-                var temp = tars;
-                vm.tariefNaam = temp[vm.details.plan -1].naam
-            })
-
-    }
-    
-
-    levserviceController.$inject = ['$scope', "$routeParams", "tariefService", "leverancierService"];
-
-    function levserviceController($scope, $routeParams, tariefService, leverancierService) {
+    function levserviceController(tariefService) {
         var vm = this;
         
         vm.getTarieven = function() {
@@ -380,9 +246,9 @@
         }
     }
 
-    levserviceCreateController.$inject = ['$scope','$location','tariefService', 'leverancierService'];
+    levserviceCreateController.$inject = ['leverancierService','$location'];
 
-    function levserviceCreateController($scope,$location,tariefService, leverancierService) {
+    function levserviceCreateController(leverancierService,$location) {
         var vm = this;
         leverancierService.getLeveranciers()
             .success(function(leveranciers) {
@@ -392,13 +258,15 @@
                 vm.error = err;
                 vm.errorMsg = "Er is iets gout gegaan";
             });
-        var temp = leverancierService.getTemp();
-        vm.provider = temp !== null ? temp.provider : undefined;
+
+        vm.onCreateLeverancier = function() {
+            $location.path('/createleverancier');
+        };
     }
 
-    levserviceEditController.$inject = ['$routeParams','$scope', '$location', 'tariefService'];
+    levserviceEditController.$inject = ['$routeParams','tariefService'];
 
-    function levserviceEditController($routeParams,$scope, $location, tariefService) {
+    function levserviceEditController($routeParams,tariefService) {
         var vm = this;
         vm.id = $routeParams.id;
         tariefService.getTarieven()
@@ -408,22 +276,40 @@
             });
     }
 
-    aanvraagController.$inject = ['$scope', '$location', 'aanvraagService', '$filter'];
+    /* Controller voor het beheren van aanvragen */
 
-    function aanvraagController($scope, $location, aanvraagService, $filter) {
+    aanvraagController.$inject = ['$location', 'aanvraagService', 'tariefService'];
+
+    function aanvraagController($location, aanvraagService,tariefService ) {
         var vm = this;
 
-        vm.loc = $location.path()
+        vm.loc = $location.path();
         vm.flag = vm.loc.indexOf('todo') == -1;
+
+        tariefService.getTarieven().success(function(data) {
+            vm.tarieven = data;
+        });
 
         vm.aanvragen = {};
         vm.aantal = {};
+        vm.tarieven = {};
         aanvraagService.getAanvragen()
             .success(function(data) {
                 vm.aanvragen = data;
-                vm.aanvragen = $filter('aanvraagFilter')(vm.aanvragen, vm.flag);
                 vm.aantal = vm.aanvragen.length;
-            })
+
+                for(aanvraag in vm.aanvragen) {
+                    for(tarief in vm.tarieven) {
+                        if(aanvraag.tariefPlanId == tarief.id) {
+                            aanvraag.tarief = tarief.naam
+                        }
+                    }
+                }
+            });
+
+        
+
+        
     }
 
 })();
